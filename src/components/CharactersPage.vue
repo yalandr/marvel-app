@@ -1,14 +1,16 @@
 <template>
   <div class="characters-wrapper">
-    <ul class="flex-list flex just-btwn container">
-        <li v-for="character in characters" :key="character.id" class="card-item">
-            <router-link :to="{ name: 'character', params: { id: character.id } }">
-                {{ character.name }} <br>
-                <img :src="`${character.thumbnail.path}/${characterPosterSize}`" alt="Poster">
-            </router-link>
-        </li>
-    </ul>
-    <button class="btn" @click="moreItems">More</button>
+    <div class="container">
+        <ul class="flex-list flex just-btwn">
+            <li v-for="character in characters" :key="character.id" class="card-item">
+                <router-link :to="{ name: 'character', params: { id: character.id } }">
+                    <img :src="`${character.thumbnail.path}/${characterPosterSize}`" alt="Poster" class="card-item-img"> <br>
+                    <h4>{{ character.name }}</h4>
+                </router-link>
+            </li>
+        </ul>
+        <button class="btn" @click="moreItems">More</button>
+    </div>
   </div>
 </template>
 
@@ -22,7 +24,7 @@ export default {
         return {
             characters: [],
             characterPosterSize: 'portrait_medium.jpg',
-            pageLimit: 12,
+            pageLimit: 50,
             pageOffset: 12,
             totalPages: null,
             currentPage: null

@@ -1,19 +1,23 @@
 <template>
   <div class="character-wrapper">
     <div class="character-card container" v-for="char in characterData" :key="char.id">
-        <h2>
+        <h2 class="card-title">
             {{ char.name }}
         </h2>
-        <img :src="thumbnailUrl" alt="">
-        <p>
-            {{ char.description }}
-        </p>
-        <h3>{{ char.name }} takes part in:</h3>
-        <ul class="flex just-btwn">
-            <li v-for="comics in char.comics.items" :key="comics.name" class="card-item">
-                {{ comics.name }}
-            </li>
-        </ul>
+        <div class="card-content flex flex-start just-btwn">
+            <img :src="thumbnailUrl" alt="" class="card-content-img">
+            <div class="card-content-text">
+                <p>
+                    {{ char.description }}
+                </p>
+                <h3>{{ char.name }} takes part in:</h3>
+                <ul class="flex just-btwn">
+                    <li v-for="comics in char.comics.items" :key="comics.name" class="card-item">
+                        {{ comics.name }}
+                    </li>
+                </ul>
+            </div>
+        </div>
         <router-link to="/">
             <button class="btn btn-back">Back</button>
         </router-link>
@@ -78,5 +82,23 @@ export default {
     background-color: rgba(0,0,0,.6);
     backdrop-filter: blur(6px);
     border: 1px solid #333
+}
+.card-title {
+    margin-bottom: 1rem;
+}
+.card-content {
+    margin-bottom: 1rem;
+}
+.card-content-img {
+    border-radius: 5px;
+    width: 35%;
+    height: auto;
+}
+.card-content-text {
+    width: 60%;
+}
+.card-content-text p,
+.card-content-text h3 {
+    margin-bottom: 1rem;
 }
 </style>

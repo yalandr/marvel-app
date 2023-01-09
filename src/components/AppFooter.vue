@@ -27,4 +27,7 @@ export default {
     width: 6rem;
     height: auto;
 }
+.footer-link {
+    font-size: 14px;
+}
 </style>

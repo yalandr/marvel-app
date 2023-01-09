@@ -19,7 +19,7 @@ export default {
 
 <style>
 .header {
-    background-color: #202020;
+    background-color: #101010;
     color: #fff;
     padding: 1rem;
 }

@@ -69,6 +69,9 @@ li {
 .center {
   align-items: center;
 }
+.flex-start {
+  align-items: flex-start;
+}
 .just-center {
   justify-content: center;
 }
@@ -84,11 +87,34 @@ li {
   backdrop-filter: blur(6px);
   border: 1px solid #333;
   padding: 1rem;
+  text-align: center;
 }
 .card-item a {
   display: block;
   width: 100%;
   height: 100%;
   padding: 1rem;
+}
+.card-item-img {
+  width: 90%;
+  max-width: 100px;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+.btn {
+  padding: 0.5rem 1rem;
+  min-width: 5rem;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #1F69B1;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  transition: .2s;
+}
+.btn:hover {
+  background-color: #09529c;
 }
 </style>
