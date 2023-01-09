@@ -1,18 +1,23 @@
 <template>
-  <div class="character-wrapper container" v-for="char in characterData" :key="char.id">
-    <h2>
-        {{ char.name }}
-    </h2>
-    <img :src="thumbnailUrl" alt="">
-    <p>
-        {{ char.description }}
-    </p>
-    <h3>{{ char.name }} tooks part in:</h3>
-    <ul>
-        <li v-for="comics in char.comics.items" :key="comics.name">
-            {{ comics.name }}
-        </li>
-    </ul>
+  <div class="character-wrapper">
+    <div class="character-card container" v-for="char in characterData" :key="char.id">
+        <h2>
+            {{ char.name }}
+        </h2>
+        <img :src="thumbnailUrl" alt="">
+        <p>
+            {{ char.description }}
+        </p>
+        <h3>{{ char.name }} takes part in:</h3>
+        <ul class="flex just-btwn">
+            <li v-for="comics in char.comics.items" :key="comics.name" class="card-item">
+                {{ comics.name }}
+            </li>
+        </ul>
+        <router-link to="/">
+            <button class="btn btn-back">Back</button>
+        </router-link>
+    </div>
   </div>
 </template>
 
@@ -51,5 +56,27 @@ export default {
 </script>
 
 <style>
-
+.character-wrapper {
+    padding: 2rem 0;
+    background: #000 url(../assets/characters-bg.jpg) no-repeat center / cover;
+    position: relative;
+    flex:1;
+}
+.character-wrapper::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(0,0,0,.85);
+    top: 0;
+    left: 0;
+}
+.character-card {
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,.6);
+    backdrop-filter: blur(6px);
+    border: 1px solid #333
+}
 </style>

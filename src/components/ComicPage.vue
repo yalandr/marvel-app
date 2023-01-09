@@ -1,9 +1,17 @@
 <template>
-    <div class="comic-wrapper container" v-for="comic in comicData" :key="comic.id">
-      <h2>
-          {{ comic.title }}
-      </h2>
-      <img :src="thumbnailUrl" alt="">
+    <div class="comic-wrapper">
+        <div class="container comic-card" v-for="comic in comicData" :key="comic.id">
+            <h2>
+                {{ comic.title }}
+            </h2>
+            <img :src="comicPosterUrl" alt="">
+            <p>
+                {{ comic.description }}
+            </p>
+            <router-link to="/comics">
+                <button class="btn btn-back">Back</button>
+            </router-link>
+        </div>
     </div>
   </template>
   
@@ -17,8 +25,8 @@
           return {
               comicId: this.$route.params.id,
               comicData: [],
-              thumbnailUrl: '',
-              thumbnailSize: 'standard_fantastic.jpg'
+              comicPosterUrl: '',
+              comicPosterSize: 'portrait_uncanny.jpg',
           }
       },
       methods: {
@@ -28,7 +36,7 @@
                       result.data.data.results.forEach((item) => {
                           this.comicData.push(item);
                           console.log(this.comicData);
-                        //   this.thumbnailUrl = `${item.thumbnail.path}/${this.thumbnailSize}`;
+                          this.comicPosterUrl = `${item.thumbnail.path}/${this.comicPosterSize}`;
                       })
                   })
                   .catch((error) => {
@@ -43,5 +51,27 @@
   </script>
   
   <style>
-  
+    .comic-wrapper {
+        padding: 2rem 0;
+        background: #000 url(../assets/characters-bg.jpg) no-repeat center / cover;
+        position: relative;
+        flex:1;
+    }
+    .comic-wrapper::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background-color: rgba(0,0,0,.85);
+        top: 0;
+        left: 0;
+    }
+    .comic-card {
+        padding: 1rem;
+        border-radius: 5px;
+        background-color: rgba(0,0,0,.6);
+        backdrop-filter: blur(6px);
+        border: 1px solid #333
+    }
   </style>
