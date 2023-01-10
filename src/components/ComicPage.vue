@@ -4,6 +4,9 @@
             <h2 class="card-title">
                 {{ comic.title }}
             </h2>
+            <div class="error-message" v-if="errorMessage">
+                <h3>{{ errorMessage }}</h3>
+            </div>
             <div class="card-content flex flex-start just-btwn">
                 <img :src="comicPosterUrl" alt="Poster" class="card-content-img">
                 <div class="card-content-text">
@@ -46,6 +49,7 @@
               comicData: [],
               comicPosterUrl: '',
               comicPosterSize: 'portrait_uncanny.jpg',
+                errorMessage: '',
           }
       },
       methods: {
@@ -59,7 +63,7 @@
                       })
                   })
                   .catch((error) => {
-                      console.log(error);
+                    this.errorMessage = error;
                   })
           }
       },

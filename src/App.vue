@@ -86,7 +86,6 @@ li {
   margin-bottom: 1rem;
   backdrop-filter: blur(6px);
   border: 1px solid #333;
-  padding: 1rem;
   text-align: center;
 }
 .card-item a {
@@ -148,6 +147,9 @@ li {
   font-size: 13px;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0;
+}
+.card-content-text .card-item a {
+  padding: 0.5rem;
 }
 </style>

@@ -1,6 +1,9 @@
 <template>
   <div class="character-wrapper">
-    <div class="character-card container" v-for="char in characterData" :key="char.id">
+    <div class="error-message" v-if="errorMessage">
+        <h3>{{ errorMessage }}</h3>
+    </div>
+    <div v-else class="character-card container" v-for="char in characterData" :key="char.id">
         <h2 class="card-title">
             {{ char.name }}
         </h2>
@@ -36,7 +39,8 @@ export default {
             characterId: this.$route.params.id,
             characterData: [],
             thumbnailUrl: '',
-            thumbnailSize: 'standard_fantastic.jpg'
+            thumbnailSize: 'standard_fantastic.jpg',
+            errorMessage: '',
         }
     },
     methods: {
@@ -50,7 +54,7 @@ export default {
                     })
                 })
                 .catch((error) => {
-                    console.log(error);
+                    this.errorMessage = error;
                 })
         }
     },
