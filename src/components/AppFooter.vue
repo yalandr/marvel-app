@@ -3,7 +3,7 @@
     <div class="container flex center just-btwn">
         <img src="../assets/logo.png" alt="Logo" class="footer-logo">
         <a href="https://developer.marvel.com/" class="footer-link" target="_blank">
-            Official Marvel Comics API
+            Data provided by Marvel. © 2014 Marvel
         </a>
     </div>
   </footer>

@@ -1,57 +1,91 @@
 <template>
   <div class="characters-wrapper">
     <div class="container">
-        <ul class="flex-list flex just-btwn">
-            <li v-for="character in characters" :key="character.id" class="card-item">
+        <div class="control-panel">
+            <AppInput v-model="searchQuery" placeholder="Search..." />
+        </div>
+        <div class="error-message" v-if="errorMessage">
+            <h3>{{ errorMessage }}</h3>
+        </div>
+        <ul v-else class="flex-list flex just-btwn">
+            <LoadingGif v-if="isLoading" />
+            <li v-else v-for="character in searchedCharacters" :key="character.id" class="card-item">
                 <router-link :to="{ name: 'character', params: { id: character.id } }">
                     <img :src="`${character.thumbnail.path}/${characterPosterSize}`" alt="Poster" class="card-item-img"> <br>
                     <h4>{{ character.name }}</h4>
                 </router-link>
             </li>
         </ul>
-        <button class="btn" @click="moreItems">More</button>
+        <AppPagination 
+            :totalPages="totalPages"
+            :currentPage="currentPage"
+            @switchPage="switchPage"
+        />
     </div>
   </div>
 </template>
 
 <script>
 import { public_key, secret_key } from '@/marvel';
+import AppInput from '@/components/AppInput.vue';
+import AppPagination from '@/components/AppPagination.vue';
+import LoadingGif from '@/components/LoadingGif.vue';
 import axios from 'axios';
 
 export default {
     name: 'CharactersPage',
+    components: {
+        AppInput,
+        LoadingGif,
+        AppPagination
+    },
     data() {
         return {
             characters: [],
             characterPosterSize: 'portrait_medium.jpg',
-            pageLimit: 50,
-            pageOffset: 12,
-            totalPages: null,
-            currentPage: null
+            pageLimit: 20,
+            totalPages: 0,
+            currentPage: 1,
+            searchQuery: '',
+            isLoading: false,
+            errorMessage: ''
         }
     },
     methods: {
         getCharacters() {
+            this.isLoading = true;
             axios.get(`http://gateway.marvel.com/v1/public/characters?apikey=${public_key}`, {
                 params: {
                     limit: this.pageLimit,
                     offset: this.currentPage * this.pageLimit
                 }
             })
-                .then((result) => {
-                    this.characters = result.data.data.results;
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
+            .then((result) => {
+                this.totalPages = Math.floor(result.data.data.total / this.pageLimit);
+                this.characters = result.data.data.results;
+                this.isLoading = false;
+            })
+            .catch((error) => {
+                this.errorMessage = error;
+                this.isLoading = false;
+            })
         },
-        moreItems() {
-            this.pageLimit += this.pageOffset;
-            this.getCharacters();
+        switchPage(page) {
+            this.currentPage = page;
         }
     },
     mounted() {
         this.getCharacters();
+    },
+    computed: {
+        searchedCharacters() {
+            return this.characters.filter(item => item.name.toLowerCase().includes(this.searchQuery.toLowerCase()))
+        }
+    },
+    watch: {
+        currentPage() {
+            this.getCharacters();
+        },
     }
 }
 </script>

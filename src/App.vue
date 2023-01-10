@@ -80,7 +80,7 @@ li {
 }
 
 .card-item {
-  width: 32%;
+  width: 24%;
   border-radius: 5px;
   background-color: rgba(0,0,0,.6);
   margin-bottom: 1rem;
@@ -101,6 +101,8 @@ li {
   border-radius: 5px;
   margin-bottom: 0.5rem;
 }
+
+/*==== BUTTON ============*/
 .btn {
   padding: 0.5rem 1rem;
   min-width: 5rem;
@@ -116,5 +118,36 @@ li {
 }
 .btn:hover {
   background-color: #09529c;
+}
+
+/*==== CARDS ============*/
+.card-title {
+    margin-bottom: 1rem;
+}
+.card-content {
+    margin-bottom: 1rem;
+}
+.card-content-img {
+    border-radius: 5px;
+    width: 35%;
+    height: auto;
+}
+.card-content-text {
+    width: 60%;
+}
+.card-content-text p,
+.card-content-text h3 {
+    margin-bottom: 1rem;
+}
+.card-content-text p {
+  font-size: 14px;
+  color: #ddd;
+  line-height: 1.6;
+}
+.card-content-text .card-item {
+  font-size: 13px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 </style>
